@@ -27,7 +27,7 @@ body{font-family:'Poppins',sans-serif;background:#fff;color:#1a1a1a;-webkit-font
 .announce{
   background:var(--green-bar);
   text-align:center;
-  padding:10px 16px;
+  padding:0 12px;
   font-size:.72rem;
   font-weight:700;
   letter-spacing:.3px;
@@ -35,9 +35,13 @@ body{font-family:'Poppins',sans-serif;background:#fff;color:#1a1a1a;-webkit-font
   position:fixed;
   top:0;left:0;right:0;
   z-index:1001;
-  display:flex;align-items:center;justify-content:center;gap:24px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  height:38px;
+  white-space:nowrap;
+  overflow:hidden;
 }
-.announce-arrow{background:none;border:none;cursor:pointer;font-size:.8rem;color:#3a5200;padding:0 4px}
+.announce-text{flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.7rem}
+.announce-arrow{background:none;border:none;cursor:pointer;font-size:.8rem;color:#3a5200;padding:0 4px;flex-shrink:0}
 
 /* NAV */
 .nav{
