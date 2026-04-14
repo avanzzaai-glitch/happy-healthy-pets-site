@@ -185,14 +185,14 @@ nav.light .nav-burger span{background:var(--ink)}
 .prod-count-label strong{color:var(--ink);font-weight:700}
 
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--mid);overflow:hidden}.product-card{margin:0;border-radius:0;border:none}
-.product-card{background:var(--white);border:1px solid var(--mid);border-radius:4px;overflow:hidden;transition:all .35s var(--ease);position:relative;display:flex;flex-direction:column;cursor:pointer}
+.product-card{background:var(--white);border:1px solid var(--mid);border-radius:20px;overflow:hidden;transition:all .35s var(--ease);position:relative;display:flex;flex-direction:column;cursor:pointer}
 .product-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g2),var(--g4));transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
 .product-card:hover{border-color:rgba(45,122,80,.25);box-shadow:0 20px 60px rgba(0,0,0,.09);transform:translateY(-6px)}
 .product-card:hover::after{transform:scaleX(1)}
 .product-card.hidden{display:none}
 
-.pc-img-wrap{position:relative;background:#e8f0ea;height:220px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:20px}
-.pc-img-wrap img{width:160px;height:160px;object-fit:cover;object-position:center;border-radius:50%;transition:transform .6s var(--ease);box-shadow:0 8px 32px rgba(0,0,0,.18);flex-shrink:0}
+.pc-img-wrap{position:relative;background:var(--cream);height:230px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:24px}
+.pc-img-wrap img{width:182px;height:182px;object-fit:cover;object-position:center;border-radius:50%;transition:transform .6s var(--ease);box-shadow:0 10px 36px rgba(0,0,0,.22);flex-shrink:0}
 .product-card:hover .pc-img-wrap img{transform:scale(1.1)}
 .pc-no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,var(--cream),var(--gmint))}
 
@@ -326,7 +326,7 @@ footer{background:var(--ink2);padding:32px 5%;border-top:1px solid rgba(255,255,
   .trust-sep{display:none}
   .products-grid{grid-template-columns:1fr 1fr;gap:1px}
   .pc-img-wrap{height:185px;padding:16px}
-  .pc-img-wrap img{width:140px;height:140px}
+  .pc-img-wrap img{width:148px;height:148px}
   .pc-name{font-size:1.2rem}
   .pc-body{padding:1rem 1rem 1.2rem}
   .pc-cat-line{font-size:.55rem}
@@ -345,8 +345,8 @@ footer{background:var(--ink2);padding:32px 5%;border-top:1px solid rgba(255,255,
 }
 @media(max-width:420px){
   .products-grid{grid-template-columns:1fr 1fr;gap:1px}
-  .pc-img-wrap{height:150px;padding:12px}
-  .pc-img-wrap img{width:115px;height:115px}
+  .pc-img-wrap{height:148px;padding:10px}
+  .pc-img-wrap img{width:120px;height:120px}
   .pc-body{padding:.8rem .9rem 1rem}
   .pc-name{font-size:1.1rem}
   .pc-desc{display:none}
@@ -422,6 +422,9 @@ footer{background:var(--ink2);padding:32px 5%;border-top:1px solid rgba(255,255,
   .reviews-sec{padding:70px 5%}
 }
 
+
+.btn-all-prods{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--white);font-family:var(--ff-sans);font-size:.82rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;padding:16px 36px;border-radius:2px;transition:all .3s var(--ease)}
+.btn-all-prods:hover{background:var(--g2);transform:translateY(-2px)}
 </style>
 </head>
 <body>
@@ -612,6 +615,11 @@ footer{background:var(--ink2);padding:32px 5%;border-top:1px solid rgba(255,255,
       <p class="prod-count-label"><strong id="prod-count">35</strong> suplementos · Todos los productos</p>
     </div>
     <div class="products-grid" id="products-grid"></div>
+  </div>
+  <div style="text-align:center;margin-top:3rem;padding-bottom:1rem">
+    <a href="catalogo.html" class="btn-all-prods">
+      Ver catálogo completo &mdash; 35 productos &rarr;
+    </a>
   </div>
 </section>
 
@@ -876,8 +884,8 @@ let activeFilter = 'all';
 // ─── RENDER PRODUCTS ───
 function renderProducts() {
   const grid = document.getElementById('products-grid');
-  const filtered = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeFilter);
-  document.getElementById('prod-count').textContent = filtered.length;
+  const filtered = activeFilter === 'all' ? PRODUCTS.filter(p => p.featured).slice(0,8) : PRODUCTS.filter(p => p.cat === activeFilter).slice(0,8);
+  document.getElementById('prod-count').textContent = PRODUCTS.filter(p=>p.featured).length;
 
   grid.innerHTML = filtered.map(p => {
     const mainImg = p.img || '';
